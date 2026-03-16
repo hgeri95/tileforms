@@ -61,13 +61,13 @@ class ProductServiceTest {
 
     @Test
     fun `getProducts returns paginated results`() {
-        val pageable = PageRequest.of(0, 12)
         every { productRepository.findByIsActiveTrue(any()) } returns PageImpl(listOf(testProduct))
 
         val result = productService.getProducts(0, 12, null)
 
         assertEquals(1, result.content.size)
         assertEquals(testProduct.name, result.content.first().name)
+        verify { productRepository.findByIsActiveTrue(PageRequest.of(0, 12)) }
     }
 
     @Test

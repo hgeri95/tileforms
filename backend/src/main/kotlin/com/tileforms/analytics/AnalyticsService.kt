@@ -33,12 +33,10 @@ class AnalyticsService(
 ) {
     fun getDashboardStats(): DashboardStats {
         val totalProducts = productRepository.count()
-        val allOrders = orderRepository.findAll()
-        val totalOrders = allOrders.size.toLong()
-        val pendingOrders = allOrders.count { it.status == OrderStatus.PENDING }.toLong()
-        val totalRevenue = allOrders
-            .filter { it.status in listOf(OrderStatus.PAID, OrderStatus.SHIPPED, OrderStatus.DELIVERED) }
-            .fold(BigDecimal.ZERO) { acc, order -> acc + order.totalAmount }
+        val totalOrders = orderRepository.count()
+        val pendingOrders = orderRepository.countByStatus(OrderStatus.PENDING)
+        val revenueStatuses = listOf(OrderStatus.PAID, OrderStatus.SHIPPED, OrderStatus.DELIVERED)
+        val totalRevenue = orderRepository.sumTotalAmountByStatusIn(revenueStatuses) ?: BigDecimal.ZERO
         val recentOrders = orderRepository.findAll(PageRequest.of(0, 10))
             .content.map { order ->
                 RecentOrderSummary(
