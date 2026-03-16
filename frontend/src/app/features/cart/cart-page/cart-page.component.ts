@@ -1,0 +1,91 @@
+import { Component, ChangeDetectionStrategy, inject, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { CartService } from '../../../core/services/cart.service';
+import { PriceDisplayComponent } from '../../../shared/components/price-display/price-display.component';
+import { CartItem } from '../../../shared/models/cart.model';
+
+@Component({
+  selector: 'tf-cart-page',
+  standalone: true,
+  imports: [
+    AsyncPipe,
+    RouterLink,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    PriceDisplayComponent,
+  ],
+  template: `
+    <div class="container py-8 max-w-4xl">
+      <h1 class="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
+
+      @if (cart$ | async; as cart) {
+        @if (cart.items.length === 0) {
+          <div class="text-center py-16">
+            <mat-icon class="text-6xl text-gray-300 mb-4">shopping_cart</mat-icon>
+            <h2 class="text-xl text-gray-500 mb-4">Your cart is empty</h2>
+            <a routerLink="/catalog" mat-flat-button color="primary">
+              Continue Shopping
+            </a>
+          </div>
+        } @else {
+          <div class="space-y-4">
+            @for (item of cart.items; track item.id) {
+              <div class="flex items-center gap-4 bg-white rounded-lg p-4 shadow-sm">
+                <div class="w-20 h-20 bg-gray-100 rounded-lg flex-shrink-0 flex items-center justify-center overflow-hidden">
+                  @if (item.imageUrl) {
+                    <img [src]="item.imageUrl" [alt]="item.productName" class="w-full h-full object-cover">
+                  } @else {
+                    <span class="text-2xl">🪟</span>
+                  }
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-semibold text-gray-900 truncate">{{ item.productName }}</h3>
+                  <p class="text-sm text-gray-500">{{ item.variantInfo }}</p>
+                  <p class="text-sm text-gray-500">Qty: {{ item.quantity }}</p>
+                </div>
+                <div class="text-right">
+                  <tf-price-display [price]="item.price * item.quantity"></tf-price-display>
+                </div>
+                <button mat-icon-button (click)="removeItem(item)" color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            }
+          </div>
+
+          <mat-divider class="my-6"></mat-divider>
+
+          <div class="flex justify-between items-center mb-6">
+            <span class="text-xl font-semibold">Total:</span>
+            <tf-price-display [price]="cart.totalAmount" priceClass="text-2xl font-bold text-tileforms-700"></tf-price-display>
+          </div>
+
+          <div class="flex gap-4 justify-end">
+            <a routerLink="/catalog" mat-stroked-button>Continue Shopping</a>
+            <a routerLink="/checkout" mat-flat-button color="primary" class="px-8">
+              Proceed to Checkout
+            </a>
+          </div>
+        }
+      }
+    </div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class CartPageComponent implements OnInit {
+  private readonly cartService = inject(CartService);
+  readonly cart$ = this.cartService.cart$;
+
+  ngOnInit(): void {
+    this.cartService.loadCart().subscribe();
+  }
+
+  removeItem(item: CartItem): void {
+    this.cartService.removeItem(item.id).subscribe();
+  }
+}

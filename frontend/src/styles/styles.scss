@@ -1,0 +1,58 @@
+@use '@angular/material' as mat;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Custom TileForms theme
+$tileforms-primary: mat.define-palette(mat.$red-palette, 700, 500, 900);
+$tileforms-accent: mat.define-palette(mat.$orange-palette, 500);
+$tileforms-warn: mat.define-palette(mat.$red-palette);
+
+$tileforms-theme: mat.define-light-theme((
+  color: (
+    primary: $tileforms-primary,
+    accent: $tileforms-accent,
+    warn: $tileforms-warn,
+  ),
+  typography: mat.define-typography-config(
+    $font-family: 'Inter, sans-serif'
+  ),
+  density: 0,
+));
+
+@include mat.all-component-themes($tileforms-theme);
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #fafafa;
+  color: #1a1a1a;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+// Product card styles
+.product-card {
+  @apply cursor-pointer transition-shadow duration-200;
+  
+  &:hover {
+    @apply shadow-lg;
+  }
+}
+
+// IKEA-inspired button styles
+.btn-primary {
+  @apply bg-tileforms-700 text-white px-6 py-3 font-medium rounded hover:bg-tileforms-800 transition-colors duration-200;
+}
+
+.btn-secondary {
+  @apply border-2 border-tileforms-700 text-tileforms-700 px-6 py-3 font-medium rounded hover:bg-tileforms-50 transition-colors duration-200;
+}
