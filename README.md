@@ -152,6 +152,21 @@ npm start
 # The app runs at http://localhost:4200
 ```
 
+### 🚀 Quick Start (Local Profile - No Docker Required)
+
+Run the backend with an embedded H2 database — no PostgreSQL, Redis, or Docker needed:
+
+```bash
+cd backend
+./mvnw spring-boot:run -Dspring-boot.run.profiles=local
+```
+
+- H2 Console: http://localhost:8080/h2-console (JDBC URL: `jdbc:h2:mem:tileforms`)
+- The database schema is auto-created from JPA entities (Flyway is disabled)
+- Data is in-memory and resets on each restart
+
+> **Note:** Redis-dependent features (cart caching) and email features won't work without their respective services. Use `docker-compose up redis mailhog` if you need them.
+
 ---
 
 ## 🧪 Running Tests
