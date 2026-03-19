@@ -37,10 +37,13 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          cache: 'gradle'
+          cache: 'maven'
+
+      - name: Grant execute permission for mvnw
+        run: chmod +x backend/mvnw
 
       - name: Build backend JAR
-        run: ./gradlew bootJar --no-daemon -x test
+        run: ./mvnw -q package -DskipTests
         working-directory: backend
 
       - name: Build & push backend Docker image

@@ -9,9 +9,8 @@ frontend/.angular/
 frontend/*.env
 frontend/.env.local
 
-# Gradle / Backend
-backend/build/
-backend/.gradle/
+# Maven / Backend
+backend/target/
 backend/*.env
 *.class
 *.jar

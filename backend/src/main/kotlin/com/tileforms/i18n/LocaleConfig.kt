@@ -13,7 +13,7 @@ class LocaleConfig {
     @Bean
     fun localeResolver(): LocaleResolver =
         AcceptHeaderLocaleResolver().apply {
-            defaultLocale = Locale.ENGLISH
+            setDefaultLocale(Locale.ENGLISH)
             supportedLocales = listOf(Locale.ENGLISH, Locale("hu"))
         }
 

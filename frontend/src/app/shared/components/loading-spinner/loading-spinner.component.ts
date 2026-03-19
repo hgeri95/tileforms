@@ -5,11 +5,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   selector: 'tf-loading-spinner',
   standalone: true,
   imports: [MatProgressSpinnerModule],
-  template: `
-    <div class="flex items-center justify-center p-8">
-      <mat-spinner [diameter]="diameter" [color]="'primary'"></mat-spinner>
-    </div>
-  `,
+  templateUrl: './loading-spinner.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoadingSpinnerComponent {

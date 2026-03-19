@@ -16,56 +16,7 @@ import { AuthService } from '../../../core/services/auth.service';
     MatFormFieldModule,
     MatInputModule,
   ],
-  template: `
-    <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
-      <div class="max-w-md w-full space-y-8">
-        <div class="text-center">
-          <h2 class="text-3xl font-bold text-gray-900">Create an account</h2>
-          <p class="mt-2 text-gray-600">
-            Already have one? <a routerLink="/account/login" class="text-tileforms-700 font-medium">Sign in</a>
-          </p>
-        </div>
-
-        <div class="bg-white rounded-xl shadow-md p-8">
-          @if (error()) {
-            <div class="bg-red-50 text-red-700 p-3 rounded-lg mb-4 text-sm">{{ error() }}</div>
-          }
-
-          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
-            <div class="grid grid-cols-2 gap-4">
-              <mat-form-field>
-                <mat-label>First Name</mat-label>
-                <input matInput formControlName="firstName">
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Last Name</mat-label>
-                <input matInput formControlName="lastName">
-              </mat-form-field>
-            </div>
-            <mat-form-field class="w-full">
-              <mat-label>Email Address</mat-label>
-              <input matInput type="email" formControlName="email">
-              @if (registerForm.get('email')?.errors?.['email']) {
-                <mat-error>Please enter a valid email</mat-error>
-              }
-            </mat-form-field>
-            <mat-form-field class="w-full">
-              <mat-label>Password</mat-label>
-              <input matInput type="password" formControlName="password">
-              @if (registerForm.get('password')?.errors?.['minlength']) {
-                <mat-error>Password must be at least 8 characters</mat-error>
-              }
-            </mat-form-field>
-            <button mat-flat-button color="primary" type="submit"
-                    class="w-full py-3"
-                    [disabled]="registerForm.invalid || loading()">
-              {{ loading() ? 'Creating account...' : 'Create Account' }}
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  `,
+  templateUrl: './register.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent {
