@@ -1,0 +1,53 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/*.env
+frontend/.env.local
+
+# Gradle / Backend
+backend/build/
+backend/.gradle/
+backend/*.env
+*.class
+*.jar
+*.war
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+
+# Environment
+.env
+.env.local
+.env.*.local
+*.env
+
+# Terraform
+infra/terraform/.terraform/
+infra/terraform/*.tfstate
+infra/terraform/*.tfstate.backup
+infra/terraform/*.tfvars
+infra/terraform/.terraform.lock.hcl
+
+# Logs
+*.log
+logs/
+
+# Test coverage
+frontend/coverage/
+backend/build/reports/
+
+# Docker volumes
+pgdata/
+redisdata/

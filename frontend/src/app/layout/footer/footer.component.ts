@@ -1,0 +1,59 @@
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'tf-footer',
+  standalone: true,
+  imports: [RouterLink],
+  template: `
+    <footer class="bg-gray-900 text-gray-300 mt-16">
+      <div class="container py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- Brand -->
+          <div>
+            <h3 class="text-white font-bold text-xl mb-4">TileForms</h3>
+            <p class="text-sm leading-relaxed">
+              Handcrafted tile-covered furniture. Each piece is unique, made with care.
+            </p>
+          </div>
+
+          <!-- Shop -->
+          <div>
+            <h4 class="text-white font-semibold mb-4">Shop</h4>
+            <ul class="space-y-2 text-sm">
+              <li><a routerLink="/catalog" class="hover:text-white transition-colors">All Products</a></li>
+              <li><a routerLink="/catalog" [queryParams]="{category: 'BOX'}" class="hover:text-white transition-colors">Boxes</a></li>
+              <li><a routerLink="/catalog" [queryParams]="{category: 'COFFEE_TABLE'}" class="hover:text-white transition-colors">Coffee Tables</a></li>
+            </ul>
+          </div>
+
+          <!-- Support -->
+          <div>
+            <h4 class="text-white font-semibold mb-4">Support</h4>
+            <ul class="space-y-2 text-sm">
+              <li><a routerLink="/tracking" class="hover:text-white transition-colors">Track Order</a></li>
+              <li><a routerLink="/account" class="hover:text-white transition-colors">My Account</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h4 class="text-white font-semibold mb-4">Contact</h4>
+            <ul class="space-y-2 text-sm">
+              <li>info@tileforms.com</li>
+              <li>Budapest, Hungary</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-8 text-sm text-center">
+          <p>&copy; {{ currentYear }} TileForms. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class FooterComponent {
+  readonly currentYear = new Date().getFullYear();
+}
