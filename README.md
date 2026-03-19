@@ -50,7 +50,7 @@
 | **Payments** | Stripe (Google Pay via Stripe) |
 | **Shipping** | GLS API |
 | **Email** | Spring Mail (JavaMailSender) |
-| **Build Tool** | Gradle 8 (Kotlin DSL) |
+| **Build Tool** | Maven 3.9 (Maven Wrapper) |
 | **Infrastructure** | Google Cloud Platform |
 | **Container** | Docker + Cloud Run |
 | **CI/CD** | GitHub Actions |
@@ -98,7 +98,7 @@ tileforms/
 | Node.js | 20+ |
 | Docker | 24+ |
 | Docker Compose | 2.20+ |
-| Gradle | 8.6+ (or use wrapper) |
+| Maven | 3.9+ (or use wrapper) |
 | Terraform | 1.6+ (for infra only) |
 
 ---
@@ -136,7 +136,7 @@ cd backend
 docker-compose up -d postgres redis mailhog
 
 # Run backend
-./gradlew bootRun --args='--spring.profiles.active=dev'
+./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
 **Frontend:**
@@ -159,8 +159,8 @@ npm start
 **Backend:**
 ```bash
 cd backend
-./gradlew test
-# Reports: backend/build/reports/tests/
+./mvnw test
+# Reports: backend/target/surefire-reports/
 ```
 
 **Frontend:**
@@ -177,8 +177,8 @@ npm test
 **Backend:**
 ```bash
 cd backend
-./gradlew bootJar
-# Output: backend/build/libs/tileforms-backend-*.jar
+./mvnw package -DskipTests
+# Output: backend/target/tileforms-backend-*.jar
 ```
 
 **Frontend:**

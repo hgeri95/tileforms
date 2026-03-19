@@ -19,68 +19,7 @@ import { Order } from '../../../shared/models/order.model';
     MatInputModule,
     MatIconModule,
   ],
-  template: `
-    <div class="container py-8 max-w-2xl">
-      <h1 class="text-3xl font-bold text-gray-900 mb-2">Track Your Order</h1>
-      <p class="text-gray-600 mb-8">Enter your tracking number to see your order status</p>
-
-      <form [formGroup]="trackingForm" (ngSubmit)="trackOrder()" class="flex gap-3 mb-8">
-        <mat-form-field class="flex-1">
-          <mat-label>Tracking Number</mat-label>
-          <input matInput formControlName="trackingNumber" placeholder="e.g., GLS123456789012">
-          <mat-icon matSuffix>local_shipping</mat-icon>
-        </mat-form-field>
-        <button mat-flat-button color="primary" type="submit"
-                [disabled]="trackingForm.invalid || loading()">
-          {{ loading() ? 'Searching...' : 'Track' }}
-        </button>
-      </form>
-
-      @if (error()) {
-        <div class="bg-red-50 text-red-700 p-4 rounded-lg mb-4">
-          Order not found. Please check your tracking number.
-        </div>
-      }
-
-      @if (order()) {
-        <div class="bg-white rounded-xl shadow-md p-6 space-y-4">
-          <div class="flex items-center justify-between">
-            <h2 class="text-xl font-bold text-gray-900">Order Status</h2>
-            <span class="px-3 py-1 rounded-full text-sm font-medium"
-                  [class.bg-yellow-100]="order()!.status === 'PENDING'"
-                  [class.text-yellow-800]="order()!.status === 'PENDING'"
-                  [class.bg-green-100]="order()!.status === 'DELIVERED'"
-                  [class.text-green-800]="order()!.status === 'DELIVERED'"
-                  [class.bg-blue-100]="order()!.status === 'SHIPPED'"
-                  [class.text-blue-800]="order()!.status === 'SHIPPED'">
-              {{ order()!.status }}
-            </span>
-          </div>
-
-          <div class="grid grid-cols-2 gap-4 text-sm">
-            <div>
-              <p class="text-gray-500">Order ID</p>
-              <p class="font-medium truncate">{{ order()!.id }}</p>
-            </div>
-            <div>
-              <p class="text-gray-500">Email</p>
-              <p class="font-medium">{{ order()!.email }}</p>
-            </div>
-            @if (order()!.trackingNumber) {
-              <div>
-                <p class="text-gray-500">Tracking Number</p>
-                <p class="font-medium">{{ order()!.trackingNumber }}</p>
-              </div>
-            }
-            <div>
-              <p class="text-gray-500">Order Date</p>
-              <p class="font-medium">{{ order()!.createdAt | date }}</p>
-            </div>
-          </div>
-        </div>
-      }
-    </div>
-  `,
+  templateUrl: './order-tracking.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderTrackingComponent {

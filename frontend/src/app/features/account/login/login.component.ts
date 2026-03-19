@@ -18,52 +18,7 @@ import { AuthService } from '../../../core/services/auth.service';
     MatInputModule,
     MatIconModule,
   ],
-  template: `
-    <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
-      <div class="max-w-md w-full space-y-8">
-        <div class="text-center">
-          <h2 class="text-3xl font-bold text-gray-900">Sign in to TileForms</h2>
-          <p class="mt-2 text-gray-600">
-            Or <a routerLink="/account/register" class="text-tileforms-700 hover:text-tileforms-600 font-medium">create an account</a>
-          </p>
-        </div>
-
-        <div class="bg-white rounded-xl shadow-md p-8">
-          @if (error()) {
-            <div class="bg-red-50 text-red-700 p-3 rounded-lg mb-4 text-sm">
-              {{ error() }}
-            </div>
-          }
-
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
-            <mat-form-field class="w-full">
-              <mat-label>Email Address</mat-label>
-              <input matInput type="email" formControlName="email" autocomplete="email">
-              @if (loginForm.get('email')?.errors?.['required']) {
-                <mat-error>Email is required</mat-error>
-              }
-            </mat-form-field>
-
-            <mat-form-field class="w-full">
-              <mat-label>Password</mat-label>
-              <input matInput [type]="hidePassword() ? 'password' : 'text'"
-                     formControlName="password" autocomplete="current-password">
-              <button mat-icon-button matSuffix type="button"
-                      (click)="hidePassword.set(!hidePassword())">
-                <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
-              </button>
-            </mat-form-field>
-
-            <button mat-flat-button color="primary" type="submit"
-                    class="w-full py-3"
-                    [disabled]="loginForm.invalid || loading()">
-              {{ loading() ? 'Signing in...' : 'Sign In' }}
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  `,
+  templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {

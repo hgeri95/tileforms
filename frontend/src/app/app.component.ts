@@ -7,13 +7,7 @@ import { FooterComponent } from './layout/footer/footer.component';
   selector: 'tf-root',
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, FooterComponent],
-  template: `
-    <tf-header></tf-header>
-    <main class="min-h-screen bg-gray-50 pt-16">
-      <router-outlet></router-outlet>
-    </main>
-    <tf-footer></tf-footer>
-  `,
+  templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {

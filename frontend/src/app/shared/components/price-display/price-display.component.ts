@@ -5,16 +5,7 @@ import { CurrencyFormatPipe } from '../../pipes/currency-format.pipe';
   selector: 'tf-price-display',
   standalone: true,
   imports: [CurrencyFormatPipe],
-  template: `
-    <span [class]="priceClass">
-      {{ price | currencyFormat:currency }}
-    </span>
-    @if (originalPrice && originalPrice > price) {
-      <span class="text-sm text-gray-400 line-through ml-2">
-        {{ originalPrice | currencyFormat:currency }}
-      </span>
-    }
-  `,
+  templateUrl: './price-display.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PriceDisplayComponent {

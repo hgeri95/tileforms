@@ -1,0 +1,8 @@
+<span [class]="priceClass">
+  {{ price | currencyFormat:currency }}
+</span>
+@if (originalPrice && originalPrice > price) {
+  <span class="text-sm text-gray-400 line-through ml-2">
+    {{ originalPrice | currencyFormat:currency }}
+  </span>
+}
